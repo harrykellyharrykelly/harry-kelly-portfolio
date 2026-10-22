@@ -677,3 +677,127 @@ body:has(.fyp-hero) .fyp-back a:hover {
         padding: 45px 20px;
     }
 }
+
+/* FIX: Hide the video player until a video is clicked */
+
+.video-modal:not(.active) {
+    display: none !important;
+}
+
+.video-modal.active {
+    display: flex;
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    align-items: center;
+    justify-content: center;
+}
+
+/* RESTORE VERTICAL SHORT-FORM PRESENTATION */
+
+.shortform-project .project-image {
+    aspect-ratio: 9 / 16;
+    width: 100%;
+    max-width: 340px;
+}
+
+.shortform-project .project-info {
+    max-width: 340px;
+}
+
+/* All Work: landscape films first, reels in a neat row */
+
+@media (min-width: 801px) {
+    .projects:not(.shortform-grid) {
+        grid-template-columns: repeat(6, minmax(0, 1fr));
+    }
+
+    .projects:not(.shortform-grid) .project {
+        grid-column: span 3;
+        order: 0;
+    }
+
+    .projects:not(.shortform-grid) .shortform-project {
+        grid-column: span 2;
+        order: 1;
+    }
+
+    .projects:not(.shortform-grid)
+    .shortform-project .project-image,
+    .projects:not(.shortform-grid)
+    .shortform-project .project-info {
+        max-width: 100%;
+    }
+
+    /* Short-Form filter: three portrait videos per row */
+    .projects.shortform-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 60px 30px;
+    }
+
+    .projects.shortform-grid .shortform-project {
+        grid-column: auto;
+    }
+
+    .projects.shortform-grid .shortform-project .project-image,
+    .projects.shortform-grid .shortform-project .project-info {
+        max-width: 100%;
+    }
+}
+
+/* Mobile layout */
+@media (max-width: 800px) {
+    .projects.shortform-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .shortform-project {
+        max-width: 340px;
+        width: 100%;
+    }
+}
+
+/* Portrait video playback */
+.video-modal-content:has(.video-frame.vertical) {
+    max-width: 440px;
+}
+
+.video-frame.vertical {
+    aspect-ratio: 9 / 16;
+    max-height: 75vh;
+    margin: 0 auto;
+}
+
+
+/* Video dialog must never appear until a project is clicked */
+.video-modal[hidden] { display: none !important; }
+
+/* Keep portrait projects neat across All Work and Short-Form */
+@media (min-width: 801px) {
+    .projects:not(.shortform-grid) .shortform-project {
+        grid-column: span 2;
+        order: 1;
+    }
+    .projects.shortform-grid .shortform-project {
+        grid-column: span 1;
+        order: 0;
+    }
+}
+
+/* Keep play icons inside their project thumbnails */
+.project-image {
+    position: relative;
+}
+
+/* Make the featured showreel smaller and centred */
+
+.featured-showreel {
+    max-width: 1050px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 75px;
+}
+
+.featured-showreel-image {
+    aspect-ratio: 16 / 9;
+}

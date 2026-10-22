@@ -1,3 +1,6 @@
+// The video player stays hidden until a user selects a project.
+document.getElementById("videoModal").hidden = true;
+
 
 const videoModal = document.getElementById("videoModal");
 const videoPlayer = document.getElementById("videoPlayer");
@@ -16,6 +19,7 @@ function openVideo(button) {
 );
     videoModalTitle.textContent = button.dataset.title || "Video";
 
+    videoModal.hidden = false;
     videoModal.classList.add("active");
     videoModal.setAttribute("aria-hidden", "false");
     document.body.classList.add("modal-open");
@@ -25,6 +29,7 @@ function openVideo(button) {
 
 function closeVideo() {
     videoModal.classList.remove("active");
+    videoModal.hidden = true;
     videoModal.setAttribute("aria-hidden", "true");
     document.body.classList.remove("modal-open");
 
