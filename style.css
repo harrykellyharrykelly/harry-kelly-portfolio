@@ -418,356 +418,62 @@ footer {
     transform: scale(1.025);
 }
 
-/* =========================
-   VIDEO PROJECT BUTTONS
-========================= */
-
-button.project-image {
-    border: 0;
-    padding: 0;
-    color: inherit;
-    font: inherit;
-    cursor: pointer;
-    position: relative;
-}
-
-.play-icon {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 72px;
-    height: 72px;
-    border-radius: 50%;
-    background: rgba(0, 0, 0, 0.75);
-    color: white;
-    font-size: 25px;
-    opacity: 1;
-    pointer-events: none;
-}
-
-button.project-link {
-    background: transparent;
-    border: 0;
-    border-bottom: 1px solid currentColor;
-    padding: 0 0 4px;
-    color: inherit;
-    font: inherit;
-    font-size: 13px;
-    font-weight: 600;
-    letter-spacing: 0.08em;
-    cursor: pointer;
-}
-
-/* =========================
-   FULLSCREEN VIDEO PLAYER
-========================= */
-
-.video-modal {
-    display: none;
-    position: fixed;
-    inset: 0;
-    z-index: 2000;
-    background: rgba(0, 0, 0, 0.95);
-    padding: 70px 30px;
-    align-items: center;
-    justify-content: center;
-}
-
-.video-modal.active {
-    display: flex;
-}
-
-.video-modal-content {
-    width: 100%;
-    max-width: 1200px;
-}
-
-.video-modal-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    color: #f4f2ed;
-    margin-bottom: 20px;
-    gap: 20px;
-}
-
-.video-modal-header h2 {
-    font-size: clamp(18px, 3vw, 28px);
-    font-weight: 500;
-}
-
-.video-close {
-    background: transparent;
-    border: 0;
-    color: white;
-    font-size: 40px;
-    line-height: 1;
-    cursor: pointer;
-}
-
-.video-frame {
-    width: 100%;
-    aspect-ratio: 16 / 9;
-    background: #111;
-}
-
-.video-frame iframe {
-    width: 100%;
-    height: 100%;
-    border: 0;
-}
-
-body.modal-open {
-    overflow: hidden;
-}
-
-@media (max-width: 800px) {
-    .video-modal {
-        padding: 20px;
-    }
-
-    .play-icon {
-        width: 56px;
-        height: 56px;
-        font-size: 20px;
-    }
-}
-
-
-/* =========================
-   PORTFOLIO FILTERS
-========================= */
-
-.portfolio-filters {
-    max-width: 1500px;
-    margin: 0 auto 50px;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
-}
-
-.filter-btn {
-    background: transparent;
-    border: 1px solid #777;
-    border-radius: 100px;
-    padding: 12px 22px;
-    color: #f4f2ed;
-    font-family: inherit;
-    font-size: 13px;
-    cursor: pointer;
-    transition: background 0.2s ease, color 0.2s ease;
-}
-
-.filter-btn:hover {
-    border-color: #d9ff43;
-}
-
-.filter-btn.active {
-    background: #d9ff43;
-    color: #111;
-    border-color: #d9ff43;
-}
-
-.project.is-hidden {
-    display: none;
-}
-
-@media (max-width: 800px) {
-    .portfolio-filters {
-        gap: 8px;
-        margin-bottom: 35px;
-    }
-
-    .filter-btn {
-        padding: 10px 15px;
-        font-size: 12px;
-    }
-}
-
-/* =========================
-   SHORT-FORM VERTICAL VIDEOS
-========================= */
-
-.shortform-project .project-image {
-    aspect-ratio: 9 / 16;
-    max-width: 340px;
-}
-
-.shortform-project .project-info {
-    max-width: 340px;
-}
-
-/* Portrait player for vertical reels */
-.video-modal-content:has(.video-frame.vertical) {
-    max-width: 440px;
-}
-
-.video-frame.vertical {
-    aspect-ratio: 9 / 16;
-    max-height: 75vh;
-    margin: 0 auto;
-}
-
-.video-frame.vertical iframe {
-    width: 100%;
-    height: 100%;
-}
-
-/* =========================
-   SHORT-FORM FILTER GRID
-========================= */
-
-/* Three columns only when Short-Form is selected */
-@media (min-width: 801px) {
-
-    .projects.shortform-grid {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 60px 30px;
-    }
-
-    .projects.shortform-grid .shortform-project .project-image {
-        max-width: 100%;
-    }
-
-    .projects.shortform-grid .shortform-project .project-info {
-        max-width: 100%;
-    }
-
-}
-
-/* Keep portrait videos comfortable on mobile */
-@media (max-width: 800px) {
-
-    .projects.shortform-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .projects.shortform-grid .shortform-project .project-image {
-        max-width: 340px;
-    }
-
-}
-
-
-/* =========================
-   ALL WORK - MIXED VIDEO LAYOUT
-========================= */
-
-/* Desktop: use six invisible grid columns.
-   Landscape projects occupy three columns each.
-   Portrait reels occupy two columns each. */
-
-@media (min-width: 801px) {
-
-    .projects:not(.shortform-grid) {
-        grid-template-columns: repeat(6, minmax(0, 1fr));
-    }
-
-    /* Two landscape projects per row */
-    .projects:not(.shortform-grid) .project {
-        grid-column: span 3;
-        order: 0;
-    }
-
-    /* Move reels to the bottom, three per row */
-    .projects:not(.shortform-grid) .shortform-project {
-        grid-column: span 2;
-        order: 1;
-    }
-
-    /* Keep portrait thumbnails neatly aligned */
-    .projects:not(.shortform-grid)
-    .shortform-project .project-image {
-        max-width: 100%;
-    }
-
-    .projects:not(.shortform-grid)
-    .shortform-project .project-info {
-        max-width: 100%;
-    }
-
-}
-
-/* Mobile: one project per row */
-@media (max-width: 800px) {
-
-    .projects:not(.shortform-grid) .shortform-project {
-        order: 1;
-    }
-
-}
-
-/* =========================
-   FEATURED SHOWREEL
-========================= */
-
-.featured-showreel {
-    max-width: 1500px;
-    margin: 0 auto 90px;
-}
-
-.featured-showreel-image {
-    display: block;
-    position: relative;
-    width: 100%;
-    aspect-ratio: 16 / 9;
-    padding: 0;
-    border: none;
-    background: #292929;
-    overflow: hidden;
-    cursor: pointer;
-}
-
-.featured-showreel-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-    transition: transform 0.5s ease;
-}
-
-.featured-showreel-image:hover img {
-    transform: scale(1.025);
-}
-
-.featured-showreel-info {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    gap: 30px;
-    padding-top: 25px;
-}
-
-.featured-showreel-info h3 {
-    font-size: clamp(36px, 5vw, 70px);
-    font-weight: 500;
-    letter-spacing: -3px;
-    line-height: 1;
-    margin-bottom: 15px;
-}
-
-.featured-showreel-info p:not(.project-type) {
-    font-size: 16px;
-    opacity: 0.7;
-    max-width: 600px;
-}
-
-.featured-showreel-info .project-link {
-    flex-shrink: 0;
-}
-
-@media (max-width: 800px) {
-    .featured-showreel {
-        margin-bottom: 65px;
-    }
-
-    .featured-showreel-info {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 10px;
-    }
+/* Portfolio interaction and featured showreel */
+.featured-showreel, .portfolio-filters {max-width:1500px;margin-left:auto;margin-right:auto;}
+.featured-showreel {margin-bottom:75px;}
+.featured-showreel-image {position:relative;display:block;width:100%;aspect-ratio:16/9;border:0;padding:0;overflow:hidden;background:#292929;cursor:pointer;}
+.featured-showreel-image img {display:block;width:100%;height:100%;object-fit:cover;}
+.play-icon {position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);display:grid;place-items:center;width:76px;height:76px;border-radius:50%;background:#d9ff43;color:#111;font-size:25px;}
+.featured-showreel-info {display:flex;align-items:end;justify-content:space-between;gap:30px;margin-top:24px;}
+.featured-showreel-info h3 {font-size:clamp(32px,4vw,60px);font-weight:500;letter-spacing:-2px;}
+.featured-showreel-info p {max-width:650px;}
+.project-link.video-trigger {background:transparent;border:0;border-bottom:1px solid currentColor;padding:0 0 4px;cursor:pointer;white-space:nowrap;}
+.portfolio-filters {display:flex;gap:12px;flex-wrap:wrap;margin-bottom:45px;}
+.filter-btn {background:transparent;border:1px solid #777;color:#f4f2ed;border-radius:50px;padding:11px 18px;cursor:pointer;font:inherit;font-size:13px;}
+.filter-btn:hover,.filter-btn.active {background:#d9ff43;border-color:#d9ff43;color:#111;}
+.project.is-hidden {display:none;}
+.projects.shortform-grid {grid-template-columns:repeat(3,minmax(0,1fr));}
+.video-modal {display:none;position:fixed;inset:0;z-index:2000;background:rgba(0,0,0,.92);padding:5vh 5vw;align-items:center;justify-content:center;}
+.video-modal.active {display:flex;}
+.video-modal-content {width:min(1100px,100%);color:#f4f2ed;}
+.video-modal-header {display:flex;justify-content:space-between;align-items:center;gap:20px;margin-bottom:16px;}
+.video-modal-header h2 {font-size:22px;font-weight:500;}
+.video-close {border:0;background:transparent;color:#f4f2ed;font-size:36px;cursor:pointer;}
+.video-frame {aspect-ratio:16/9;background:#222;}
+.video-frame.vertical {max-width:430px;aspect-ratio:9/16;margin:auto;}
+.video-frame iframe {width:100%;height:100%;border:0;display:block;}
+body.modal-open {overflow:hidden;}
+/* FYP page */
+.fyp-container {max-width:1200px;margin:0 auto;}
+.fyp-hero {padding:180px 40px 100px;background:#f4f2ed;}
+.fyp-hero h1 {font-size:clamp(48px,8vw,110px);line-height:.98;letter-spacing:-.045em;font-weight:500;margin-bottom:30px;}
+.fyp-subtitle {font-size:clamp(20px,2.5vw,32px);max-width:800px;margin-bottom:45px;}
+.fyp-meta {display:flex;flex-wrap:wrap;gap:15px 35px;margin-bottom:50px;font-size:11px;letter-spacing:1.5px;}
+.fyp-video {width:100%;aspect-ratio:16/9;background:#292929;overflow:hidden;}
+.fyp-video iframe {width:100%;height:100%;border:0;display:block;}
+.fyp-caption {font-size:13px;opacity:.65;margin-top:15px;}
+.fyp-section {padding:110px 40px;}
+.fyp-text {max-width:850px;}
+.fyp-section h2 {font-size:clamp(38px,5vw,70px);line-height:1.05;letter-spacing:-.04em;font-weight:500;margin-bottom:35px;}
+.fyp-text p:not(.eyebrow) {font-size:19px;line-height:1.7;margin-bottom:25px;}
+.fyp-dark {background:#111;color:#f4f2ed;}
+.fyp-section-intro {max-width:750px;font-size:19px;line-height:1.6;margin-bottom:80px;opacity:.8;}
+.fyp-experiment {margin-bottom:100px;padding-top:40px;border-top:1px solid #444;}
+.fyp-experiment-info {max-width:750px;margin-bottom:35px;}
+.fyp-experiment h3 {font-size:clamp(32px,4vw,55px);font-weight:500;letter-spacing:-.04em;margin-bottom:20px;}
+.fyp-experiment-info>p:last-child {font-size:18px;line-height:1.6;opacity:.8;}
+.fyp-report {background:#d9ff43;}
+.fyp-report p:not(.eyebrow) {max-width:650px;font-size:19px;margin-bottom:35px;}
+.fyp-back {background:#111;color:#f4f2ed;padding:55px 40px;text-align:center;}
+.fyp-back a {font-size:13px;font-weight:600;letter-spacing:1.5px;}
+.fyp-back a:hover {color:#d9ff43;}
+@media(max-width:800px) {
+ .featured-showreel-info {display:block;}
+ .featured-showreel-info .project-link {margin-top:20px;}
+ .projects.shortform-grid {grid-template-columns:1fr;}
+ .fyp-hero {padding:140px 20px 70px;}
+ .fyp-section {padding:75px 20px;}
+ .fyp-text p:not(.eyebrow) {font-size:17px;}
+ .fyp-experiment {margin-bottom:70px;}
+ .fyp-back {padding:45px 20px;}
 }
